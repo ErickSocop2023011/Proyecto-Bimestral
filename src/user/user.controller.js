@@ -14,7 +14,7 @@ export const getUserById = async (req, res) => {
         if (!user) {
             return res.status(404).json({
                 success: false,
-                message: "Usuario no encontrado"
+                msg: "Usuario no encontrado"
             });
         }
 
@@ -25,7 +25,7 @@ export const getUserById = async (req, res) => {
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error al obtener el usuario",
+            msg: "Error al obtener el usuario",
             error: err.message
         });
     }
@@ -51,7 +51,7 @@ export const getUsers = async (req, res) => {
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error al obtener los usuarios",
+            msg: "Error al obtener los usuarios",
             error: err.message
         });
     }
@@ -65,13 +65,13 @@ export const deleteUser = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "Usuario eliminado",
+            msg: "Usuario eliminado",
             user
         });
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error al eliminar el usuario",
+            msg: "Error al eliminar el usuario",
             error: err.message
         });
     }
@@ -89,7 +89,7 @@ export const updatePassword = async (req, res) => {
         if (matchOldAndNewPassword) {
             return res.status(400).json({
                 success: false,
-                message: "La nueva contraseña no puede ser igual a la anterior"
+                msg: "La nueva contraseña no puede ser igual a la anterior"
             });
         }
 
@@ -99,12 +99,12 @@ export const updatePassword = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "Contraseña actualizada",
+            msg: "Contraseña actualizada",
         });
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error al actualizar contraseña",
+            msg: "Error al actualizar contraseña",
             error: err.message
         });
     }
@@ -114,6 +114,10 @@ export const updateUser = async (req, res) => {
     try {
         const { uid } = req.params;
         const data = req.body;
+
+        if ('role' in data) {
+            delete data.role;
+        }
 
         const updatedUser = await User.findByIdAndUpdate(uid, data, { new: true });
 
@@ -166,3 +170,25 @@ export const updateProfilePicture = async (req, res) => {
         });
     }
 };
+
+export const updateRole = async (req, res) => {
+    try {
+        const { uid } = req.params;
+        const { newRole } = req.body;
+
+        const user = await User.findByIdAndUpdate(uid, { role: newRole}, { new: true })
+
+        res.status(200).json({
+            success: true,
+            msg: 'Updated user role',
+            user
+        })
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            msg: 'Error updating user role',
+            error: err.message
+        });
+    }
+}
+
