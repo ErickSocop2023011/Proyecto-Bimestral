@@ -14,7 +14,7 @@ export const getUserById = async (req, res) => {
         if (!user) {
             return res.status(404).json({
                 success: false,
-                message: "Usuario no encontrado"
+                msg: "User not found"
             });
         }
 
@@ -25,7 +25,7 @@ export const getUserById = async (req, res) => {
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error al obtener el usuario",
+            msg: "Error getting user",
             error: err.message
         });
     }
@@ -51,7 +51,7 @@ export const getUsers = async (req, res) => {
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error al obtener los usuarios",
+            message: "Error getting users",
             error: err.message
         });
     }
@@ -65,13 +65,13 @@ export const deleteUser = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "Usuario eliminado",
+            message: "Deleted user",
             user
         });
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error al eliminar el usuario",
+            message: "Error deleting user",
             error: err.message
         });
     }
@@ -89,7 +89,7 @@ export const updatePassword = async (req, res) => {
         if (matchOldAndNewPassword) {
             return res.status(400).json({
                 success: false,
-                message: "La nueva contraseña no puede ser igual a la anterior"
+                message: "The new password cannot be the same as the previous one"
             });
         }
 
@@ -99,12 +99,12 @@ export const updatePassword = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "Contraseña actualizada",
+            message: "Updated password",
         });
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error al actualizar contraseña",
+            message: "Error updating password",
             error: err.message
         });
     }
@@ -119,13 +119,13 @@ export const updateUser = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            msg: 'Usuario Actualizado',
+            msg: 'Updated User',
             user: updatedUser,
         });
     } catch (err) {
         res.status(500).json({
             success: false,
-            msg: 'Error al actualizar usuario',
+            msg: 'Error updating user',
             error: err.message
         });
     }
@@ -139,7 +139,7 @@ export const updateProfilePicture = async (req, res) => {
         if (!newProfilePicture) {
             return res.status(400).json({
                 success: false,
-                msg: 'No se proporcionó una nueva foto de perfil',
+                msg: 'No new profile photo provided',
             });
         }
 
@@ -155,13 +155,13 @@ export const updateProfilePicture = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            msg: 'Foto de perfil actualizada',
+            msg: 'Updated profile photo',
             user,
         });
     } catch (err) {
         res.status(500).json({
             success: false,
-            msg: 'Error al actualizar la foto de perfil',
+            msg: 'Error updating profile photo',
             error: err.message
         });
     }
