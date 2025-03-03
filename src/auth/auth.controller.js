@@ -1,10 +1,13 @@
+
 import { hash, verify } from 'argon2'
 import User from '../user/user.model.js'
 import {generateJWT} from '../helpers/generate-jwt.js'
 
+
 export const register = async (req, res) => {
     try {
         const data = req.body;
+
 
         const existingUser = await User.findOne({ email: data.email });
         console.log(data)
@@ -24,12 +27,14 @@ export const register = async (req, res) => {
         
     } catch (err) {
         res.status(500).json({ msg: "Error creating user", error: err.message });
+
     }
 }
 
 export const login = async (req, res) => {
     const { email, username, password } = req.body
     try{
+
         const user = await User.findOne({$or:[{email: email}, {username: username}]})
 
         if(!user){
@@ -43,7 +48,9 @@ export const login = async (req, res) => {
 
         if(!validPassword){
             return res.status(400).json({
+
                 message: "Invalid Credentials",
+
                 error: "Incorrect password"
             })
         }
@@ -55,6 +62,7 @@ export const login = async (req, res) => {
             userDetails: {
                 token: token,
                 message: "Welcome Back!"
+
             }
         })
     }catch(err){
