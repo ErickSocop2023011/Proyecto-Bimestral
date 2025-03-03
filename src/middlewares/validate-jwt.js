@@ -14,7 +14,7 @@ export const validateJWT = async (req, res, next) => {
 
         token = token.replace(/^Bearer\s+/, "")
 
-        const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
+        const { uid } = jwt.verify(token, process.env.PRIVATEKEY)
 
         const user = await User.findById(uid)
 
@@ -42,50 +42,3 @@ export const validateJWT = async (req, res, next) => {
         })
     }
 }
-
-
-export const validatePermission = async (req, res, next) => {
-    try {
-        let token = req.body.token || req.query.token || req.headers["authorization"]
-
-        if (!token) {
-            return res.status(400).json({ 
-                success: false, 
-                msg: "There is no token in the request" 
-            });
-        }
-
-        token = token.replace(/^Bearer\s+/, "")
-
-        const { uid: tokenUid, role } = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
-
-        const user = await User.findById(tokenUid);
-        if (!user) {
-            return res.status(400).json({ 
-                success: false, 
-                msg: "User not found" 
-            });
-        }
-
-        if(user.status === false){
-            return res.status(400).json({
-                success: false,
-                message: "Previously deactivated user"
-            })
-        }
-
-        if (role !== "ADMIN_ROLE" && tokenUid !== req.params.uid) {
-            return res.status(403).json({ 
-                success: false, 
-                msg: "You do not have permission to delete this user" 
-            });
-        }
-
-        next();
-    } catch (err) {
-        return res.status(500).json({ 
-            success: false, 
-            msg: "Error validating token (expired or invalid)" 
-        });
-    }
-};

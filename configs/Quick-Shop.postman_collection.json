@@ -1,0 +1,318 @@
+{
+	"info": {
+		"_postman_id": "0f38a64f-df04-4175-b3a7-e0ce65f2ea65",
+		"name": "Quick-Shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37667709"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Erick",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Socop",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "esocop",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "esocop@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Abc123**",
+									"type": "text"
+								},
+								{
+									"key": "profilePicture",
+									"type": "file",
+									"src": "/C:/Users/ersc2/Pictures/Wallpaper's/batman.jpg"
+								},
+								{
+									"key": "phone",
+									"value": "11111111",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"esocop\",\r\n    \"password\":\"Abc123**\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update My Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZDc1ZjcyYmI1MmZiMWZkM2MwMjUiLCJpYXQiOjE3NDEwMTk4MzYsImV4cCI6MTc0MTAyMzQzNn0.LfNe4pWws_nol03niT7ZLOaBc0fm0a2Lx1xva55PmUc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"Abc111**\",\r\n    \"newPassword\":\"Abc123**\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/user/updatePassword",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"user",
+								"updatePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZDc1ZjcyYmI1MmZiMWZkM2MwMjUiLCJpYXQiOjE3NDEwMTk4MzYsImV4cCI6MTc0MTAyMzQzNn0.LfNe4pWws_nol03niT7ZLOaBc0fm0a2Lx1xva55PmUc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Jahir\",\r\n    \"surname\":\"Colindres\",\r\n    \"username\":\"jahir17\",\r\n    \"email\" : \"jahir17@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/user/updateMe",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"user",
+								"updateMe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User As Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZDY0MzE3MWZlNWMyMTY4MWQzNmYiLCJpYXQiOjE3NDEwMjA2MjcsImV4cCI6MTc0MTAyNDIyN30.wboggHIfQ-HjIJshEAg5sPjW9iz7xJn0EbRxR5sKRXU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Erick\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/user/updateUser/67c5d75f72bb52fb1fd3c025",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"user",
+								"updateUser",
+								"67c5d75f72bb52fb1fd3c025"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZDc1ZjcyYmI1MmZiMWZkM2MwMjUiLCJpYXQiOjE3NDEwMjA5MjQsImV4cCI6MTc0MTAyNDUyNH0.1eekgGwTm4CKxBuMYe40nIvu2J9dIW_fh71OFVIWHR0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/user/deleteMe",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"user",
+								"deleteMe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User As Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZDY0MzE3MWZlNWMyMTY4MWQzNmYiLCJpYXQiOjE3NDEwMjE0NjksImV4cCI6MTc0MTAyNTA2OX0.8dQXmPnwaASVF2o_sZgJK8_D_ZNzKsDaugWrD6fERZ8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/user/deleteUser/67c5e0fabe74b65035828c24",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"user",
+								"deleteUser",
+								"67c5e0fabe74b65035828c24"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,149 +1,129 @@
 import {hash, verify} from 'argon2';
-import User from './user.model';
+import User from './user.model.js';
 import fs from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export const getUserById = async (req, res) => {
-    try {
-        const { uid } = req.params;
-        const user = await User.findById(uid);
-
-        if (!user) {
-            return res.status(404).json({
-                success: false,
-                message: "Usuario no encontrado"
-            });
-        }
-
-        return res.status(200).json({
-            success: true,
-            user
-        });
-    } catch (err) {
-        return res.status(500).json({
-            success: false,
-            message: "Error al obtener el usuario",
-            error: err.message
-        });
-    }
-};
-
-export const getUsers = async (req, res) => {
-    try {
-        const { limite = 5, desde = 0 } = req.query;
-        const query = { status: true };
-
-        const [total, users] = await Promise.all([
-            User.countDocuments(query),
-            User.find(query)
-                .skip(Number(desde))
-                .limit(Number(limite))
-        ]);
-
-        return res.status(200).json({
-            success: true,
-            total,
-            users
-        });
-    } catch (err) {
-        return res.status(500).json({
-            success: false,
-            message: "Error al obtener los usuarios",
-            error: err.message
-        });
-    }
-};
-
-export const deleteUser = async (req, res) => {
-    try {
-        const { uid } = req.params;
-
-        const user = await User.findByIdAndUpdate(uid, { status: false }, { new: true });
-
-        return res.status(200).json({
-            success: true,
-            message: "Usuario eliminado",
-            user
-        });
-    } catch (err) {
-        return res.status(500).json({
-            success: false,
-            message: "Error al eliminar el usuario",
-            error: err.message
-        });
-    }
-};
-
 export const updatePassword = async (req, res) => {
-    try {
-        const { uid } = req.params;
-        const { newPassword } = req.body;
+    try{
+        const { usuario } = req
+        const { password } = req.body
+        const { newPassword } = req.body
 
-        const user = await User.findById(uid);
+        const oldPassword = await verify(usuario.password, password)
 
-        const matchOldAndNewPassword = await verify(user.password, newPassword);
 
-        if (matchOldAndNewPassword) {
+        if(!oldPassword){
             return res.status(400).json({
                 success: false,
-                message: "La nueva contraseña no puede ser igual a la anterior"
-            });
+                msg: "Old password does not match"
+            })
         }
 
-        const encryptedPassword = await hash(newPassword);
+        const user = await User.findById(usuario._id)
 
-        await User.findByIdAndUpdate(uid, { password: encryptedPassword }, { new: true });
+        const matchOldAndNewPassword = await verify(user.password, newPassword)
+
+        if(matchOldAndNewPassword){
+            return res.status(400).json({
+                success: false,
+                msg: "The new password cannot be the same as the previous one"
+            })
+        }
+
+        const encryptedPassword = await hash(newPassword)
+
+        await User.findByIdAndUpdate(usuario._id, {password: encryptedPassword}, {new: true})
 
         return res.status(200).json({
             success: true,
-            message: "Contraseña actualizada",
-        });
-    } catch (err) {
+            msg: "Updated password",
+        })
+
+    }catch(err){
         return res.status(500).json({
             success: false,
-            message: "Error al actualizar contraseña",
+            msg: "Error updating password",
             error: err.message
-        });
+        })
     }
-};
+}
 
-export const updateUser = async (req, res) => {
+export const updateMe = async (req, res) => {
     try {
-        const { uid } = req.params;
-        const data = req.body;
+        const { usuario } = req
+        const data = req.body
 
-        const updatedUser = await User.findByIdAndUpdate(uid, data, { new: true });
+        const user = await User.findByIdAndUpdate(usuario._id, data, { new: true })
 
         res.status(200).json({
             success: true,
-            msg: 'Usuario Actualizado',
+            msg: "Updated user",
+            user: user
+        })
+
+        console.log(user)
+    }catch(err){
+        res.status(500).json({
+            success: false,
+            msg: "Error updating user",
+            error: err.message
+        })
+    }
+}
+
+export const updateUser = async (req, res) => {
+    try {
+        const { uid } = req.params 
+        const data = req.body 
+
+        const user = await User.findById(uid)
+
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                msg: "User not found",
+            })
+        }
+
+        if (user.role === "ADMIN_ROLE") {
+            return res.status(403).json({
+                success: false,
+                msg: "You cannot modify another admin",
+            })
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(uid, data, { new: true })
+
+        res.status(200).json({
+            success: true,
+            msg: "Updated user",
             user: updatedUser,
-        });
+        })
     } catch (err) {
         res.status(500).json({
             success: false,
-            msg: 'Error al actualizar usuario',
-            error: err.message
-        });
+            msg: "Error updating user",
+            error: err.message,
+        })
     }
-};
+}
 
 export const updateProfilePicture = async (req, res) => {
     try {
-        const { uid } = req.params;
+        const { usuario } = req;
         let newProfilePicture = req.file ? req.file.filename : null;
 
         if (!newProfilePicture) {
             return res.status(400).json({
                 success: false,
-                msg: 'No se proporcionó una nueva foto de perfil',
+                msg: 'No new profile photo provided',
             });
         }
 
-        const user = await User.findById(uid);
+        const user = await User.findById(usuario._id);
 
         if (user.profilePicture) {
             const oldProfilePicturePath = join(__dirname, "../../public/uploads/profile-pictures", user.profilePicture);
@@ -155,14 +135,68 @@ export const updateProfilePicture = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            msg: 'Foto de perfil actualizada',
+            msg: 'Updated profile photo',
             user,
         });
     } catch (err) {
         res.status(500).json({
             success: false,
-            msg: 'Error al actualizar la foto de perfil',
+            msg: 'Error updating profile photo',
             error: err.message
         });
     }
-};
+}
+
+export const deleteMe = async (req, res) => {
+    try{
+        const { usuario } = req
+
+        await User.findByIdAndUpdate(usuario, {status: false}, {new: true})
+
+        return res.status(200).json({
+            success: true,
+            message: "Deleted User"
+
+        })
+    }catch(err){
+        return res.status(500).json({
+            success: false,
+            message: "Error deleting User",
+            error: err.message
+        })
+    }
+}
+
+export const deleteUser = async (req, res) => {
+    try {
+        const { uid } = req.params
+
+        const user = await User.findById(uid)
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                msg: "User not found",
+            })
+        }
+
+        if (user.role === "ADMIN_ROLE") {
+            return res.status(403).json({
+                success: false,
+                msg: "You cannot delete another admin",
+            })
+        }
+
+        await User.findByIdAndUpdate(uid, { status: false }, { new: true })
+
+        return res.status(200).json({
+            success: true,
+            msg: "User deleted" 
+        })
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            msg: "Error deleting user",
+            error: err.message,
+        })
+    }
+}
