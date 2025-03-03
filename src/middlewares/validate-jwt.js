@@ -14,7 +14,7 @@ export const validateJWT = async (req, res, next) => {
 
         token = token.replace(/^Bearer\s+/, "")
 
-        const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
+        const { uid } = jwt.verify(token, process.env.PRIVATEKEY)
 
         const user = await User.findById(uid)
 
@@ -42,26 +42,3 @@ export const validateJWT = async (req, res, next) => {
         })
     }
 }
-
-export const validatePermission = async (req, res, next) => {
-    try {
-        let token = req.body.token || req.query.token || req.headers["authorization"]
-
-        const { uid: tokenUid, role } = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
-
-        if (role !== "ADMIN_ROLE" && tokenUid !== req.params.uid) {
-            return res.status(403).json({ 
-                success: false, 
-                msg: "You do not have permission to perform this action" 
-            });
-        }
-
-        next();
-    } catch (err) {
-        return res.status(500).json({ 
-            success: false, 
-            msg: "Error in performing the action",
-            error: err.message 
-        });
-    }
-};
