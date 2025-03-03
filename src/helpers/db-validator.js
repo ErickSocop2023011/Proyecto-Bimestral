@@ -1,4 +1,4 @@
-import User from "../user/user.model";
+import User from "../user/user.model.js";
 
 export const emailExists = async (email = "") => {
     const existe = await User.findOne({email})
@@ -19,5 +19,12 @@ export const userExists = async (uid = " ") => {
     console.log(existe)
     if(!existe){
         throw new Error("No existe el usuario con el ID proporcionado")
+    }
+}
+
+export const telephoneExists = async (telephone = "") => {
+    const existe = await User.findOne({ telephone })
+    if (existe) {
+        throw new Error(`User: ${telephone}, is already registered`)
     }
 }

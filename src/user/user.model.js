@@ -28,7 +28,7 @@ const userSchema = Schema({
     profilePicture:{
         type: String
     },
-    phone:{
+    telephone:{
         type: String,
         minLength: 8,
         maxLength: 8,
