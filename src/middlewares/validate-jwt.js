@@ -14,7 +14,7 @@ export const validateJWT = async (req, res, next) => {
 
         token = token.replace(/^Bearer\s+/, "")
 
-        const { uid } = jwt.verify(token, process.env.PRIVATEKEY)
+        const { uid } = jwt.verify(token, process.env.SECRETKEY)
 
         const user = await User.findById(uid)
 

@@ -1,4 +1,5 @@
 import User from "../user/user.model.js";
+import Category from "../category/category.model.js"
 
 export const emailExists = async (email = "") => {
     const existe = await User.findOne({email})
@@ -26,5 +27,12 @@ export const telephoneExists = async (telephone = "") => {
     const existe = await User.findOne({ telephone })
     if (existe) {
         throw new Error(`User: ${telephone}, is already registered`)
+    }
+}
+
+export const categoryExists = async (name = "") => {
+    const existe = await Category.findOne({ name })
+    if (existe) {
+        throw new Error(`Category: ${name}, is already registered`)
     }
 }
