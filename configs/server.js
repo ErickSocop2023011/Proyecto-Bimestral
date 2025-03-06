@@ -6,8 +6,9 @@ import { swaggerDocs, swaggerUi } from "./swagger.js"
 import { dbConnection } from "./mongo.js"
 import authRoutes from "../src/auth/auth.routes.js"
 import userRoutes from "../src/user/user.routes.js"
+import categoryRoutes from "../src/category/category.routes.js"
 import apiLimiter from "../src/middlewares/rate-limit-validator.js"
-import {createDefaultAdmin} from "./default-data.js"
+import {createDefaultAdmin, createDefaultCategory} from "./default-data.js"
 
 const middlewares = (app) => {
     app.use(express.urlencoded({extended: false}))
@@ -22,6 +23,7 @@ const routes = (app) =>{
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
     app.use("/quickshop/v1/auth", authRoutes)
     app.use("/quickshop/v1/user", userRoutes)
+    app.use("/quickshop/v1/category", categoryRoutes)
     
 }
 
@@ -29,6 +31,7 @@ const ConnectDB = async () =>{
     try{
         await dbConnection()
         await createDefaultAdmin()
+        await createDefaultCategory()
     }catch(err){
         console.log(`Database connecetion failed ${err}`)
         process.exit(1)
