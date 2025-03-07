@@ -1,0 +1,919 @@
+{
+	"info": {
+		"_postman_id": "0f38a64f-df04-4175-b3a7-e0ce65f2ea65",
+		"name": "Quick-Shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37667709"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Erick",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Socop",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "esocop",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "esocop@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Abc123**",
+									"type": "text"
+								},
+								{
+									"key": "profilePicture",
+									"type": "file",
+									"src": "/C:/Users/ersc2/Pictures/Wallpaper's/batman.jpg"
+								},
+								{
+									"key": "phone",
+									"value": "11111111",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"esocop\",\r\n    \"password\":\"Abc123**\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update My Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZDc1ZjcyYmI1MmZiMWZkM2MwMjUiLCJpYXQiOjE3NDEwMTk4MzYsImV4cCI6MTc0MTAyMzQzNn0.LfNe4pWws_nol03niT7ZLOaBc0fm0a2Lx1xva55PmUc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"Abc111**\",\r\n    \"newPassword\":\"Abc123**\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/user/updatePassword",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"user",
+								"updatePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZDc1ZjcyYmI1MmZiMWZkM2MwMjUiLCJpYXQiOjE3NDEwMTk4MzYsImV4cCI6MTc0MTAyMzQzNn0.LfNe4pWws_nol03niT7ZLOaBc0fm0a2Lx1xva55PmUc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Jahir\",\r\n    \"surname\":\"Colindres\",\r\n    \"username\":\"jahir17\",\r\n    \"email\" : \"jahir17@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/user/updateMe",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"user",
+								"updateMe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User As Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZDY0MzE3MWZlNWMyMTY4MWQzNmYiLCJpYXQiOjE3NDEwMjA2MjcsImV4cCI6MTc0MTAyNDIyN30.wboggHIfQ-HjIJshEAg5sPjW9iz7xJn0EbRxR5sKRXU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Erick\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/user/updateUser/67c5d75f72bb52fb1fd3c025",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"user",
+								"updateUser",
+								"67c5d75f72bb52fb1fd3c025"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZDc1ZjcyYmI1MmZiMWZkM2MwMjUiLCJpYXQiOjE3NDEwMjA5MjQsImV4cCI6MTc0MTAyNDUyNH0.1eekgGwTm4CKxBuMYe40nIvu2J9dIW_fh71OFVIWHR0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/user/deleteMe",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"user",
+								"deleteMe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User As Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZDY0MzE3MWZlNWMyMTY4MWQzNmYiLCJpYXQiOjE3NDEwMjE0NjksImV4cCI6MTc0MTAyNTA2OX0.8dQXmPnwaASVF2o_sZgJK8_D_ZNzKsDaugWrD6fERZ8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/user/deleteUser/67c5e0fabe74b65035828c24",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"user",
+								"deleteUser",
+								"67c5e0fabe74b65035828c24"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEyODE1OTIsImV4cCI6MTc0MTI4NTE5Mn0.OITVpElliGOQY9gzO1qmvYuqv6jPWFIVvYKbw70mN68",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/category/getCategories",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"category",
+								"getCategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEyODE1OTIsImV4cCI6MTc0MTI4NTE5Mn0.OITVpElliGOQY9gzO1qmvYuqv6jPWFIVvYKbw70mN68",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"vegetables\",\r\n    \"description\":\"It refers to any product related to vegetables.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/category/addcategory",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"category",
+								"addcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEyODE1OTIsImV4cCI6MTc0MTI4NTE5Mn0.OITVpElliGOQY9gzO1qmvYuqv6jPWFIVvYKbw70mN68",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Meat\",\r\n    \"description\":\"It refers to any product related to Meat\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/category/updtcategory/67c9d9b71e1bf3a7ff48560d",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"category",
+								"updtcategory",
+								"67c9d9b71e1bf3a7ff48560d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEyODE1OTIsImV4cCI6MTc0MTI4NTE5Mn0.OITVpElliGOQY9gzO1qmvYuqv6jPWFIVvYKbw70mN68",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/category/deleteCategory/67c9d9b71e1bf3a7ff48560d",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"category",
+								"deleteCategory",
+								"67c9d9b71e1bf3a7ff48560d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Add Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEzMDQzMDEsImV4cCI6MTc0MTMwNzkwMX0.KAjkJZp20KEUFSkQxqIML5qTGzhGzaqIbDhZi5AJfaY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Papalinas",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Pollo Campero Lays",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "15.75",
+									"type": "text"
+								},
+								{
+									"key": "productPicture",
+									"type": "file",
+									"src": "/C:/Users/ersc2/Desktop/product-image/papalinas-pollo-campero.jpeg"
+								},
+								{
+									"key": "stock",
+									"value": "250",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67ca31fcee914fecf9775e01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/product/addProduct",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"product",
+								"addProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEzMDQzMDEsImV4cCI6MTc0MTMwNzkwMX0.KAjkJZp20KEUFSkQxqIML5qTGzhGzaqIbDhZi5AJfaY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/product/getProducts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"product",
+								"getProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Out Of Stock",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEzMDQzMDEsImV4cCI6MTc0MTMwNzkwMX0.KAjkJZp20KEUFSkQxqIML5qTGzhGzaqIbDhZi5AJfaY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/product/outOfStock",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"product",
+								"outOfStock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Best Selling",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Product",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEzMDQzMDEsImV4cCI6MTc0MTMwNzkwMX0.KAjkJZp20KEUFSkQxqIML5qTGzhGzaqIbDhZi5AJfaY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stock\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/product/updtProduct/67ca324aee914fecf9775e05",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"product",
+								"updtProduct",
+								"67ca324aee914fecf9775e05"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEzMTQ2MTksImV4cCI6MTc0MTMxODIxOX0.Hg1crOlDCWc1DQ-YqV-e9s02q_5e7wZwiCvCoKmNiPs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/product/deleteProduct/67ca364fee914fecf9775e23",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"product",
+								"deleteProduct",
+								"67ca364fee914fecf9775e23"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shopping Cart",
+			"item": [
+				{
+					"name": "Add To Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZTBmYWJlNzRiNjUwMzU4MjhjMjQiLCJpYXQiOjE3NDEzNTg0OTcsImV4cCI6MTc0MTM2MjA5N30.0YDqVxY4CPzVkaXXepKuyx9yznxMk9_W76esbBXCgTg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"idProduct\": \"67ca3427ee914fecf9775e10\",\r\n    \"quantity\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/shoppingCart/addToCart",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"shoppingCart",
+								"addToCart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Carts",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZTBmYWJlNzRiNjUwMzU4MjhjMjQiLCJpYXQiOjE3NDEzNTg0OTcsImV4cCI6MTc0MTM2MjA5N30.0YDqVxY4CPzVkaXXepKuyx9yznxMk9_W76esbBXCgTg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/shoppingCart/deleteProduct/67ca3570ee914fecf9775e1b",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"shoppingCart",
+								"deleteProduct",
+								"67ca3570ee914fecf9775e1b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bill",
+			"item": [
+				{
+					"name": "Generate Bill",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M1ZTBmYWJlNzRiNjUwMzU4MjhjMjQiLCJpYXQiOjE3NDEzNjQ0ODQsImV4cCI6MTc0MTM2ODA4NH0.P_VOKFoTwdyXMhRjcGUVZPV3Cte8p7gIEgBgVRmVhJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"NIT\":\"123456789\",\r\n    \"address\":\"XD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/bill/confirmPurchase",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"bill",
+								"confirmPurchase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Purchases",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Purchases User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEzNjYxMzYsImV4cCI6MTc0MTM2OTczNn0.GFerLRCqCyLCnB6DZ3mVje6QXeKQFe0CkdqCkAlBmY0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/bill/getBillUser/67c5e0fabe74b65035828c24",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"bill",
+								"getBillUser",
+								"67c5e0fabe74b65035828c24"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
