@@ -15,7 +15,6 @@ export const confirmPurchase = async (req, res) => {
         const cart = await Cart.findOne({ owner: usuario._id })
             .populate("products.idProduct", "name price stock");
 
-            console.log(cart)
         if (!cart || cart.products.length === 0) {
             return res.status(400).json({
                 success: false,
@@ -31,7 +30,6 @@ export const confirmPurchase = async (req, res) => {
         const bill = new Bill({
             user: usuario._id,
             NIT: nit,
-            Addres: address,
             date: new Date(),
             products: cart.products.map(item => ({
                 idProduct: item.idProduct._id,
@@ -45,6 +43,7 @@ export const confirmPurchase = async (req, res) => {
 
         await bill.save();
 
+        // Actualiza el stock de los productos
         for (const item of cart.products) {
             await Product.findByIdAndUpdate(item.idProduct._id, {
                 $inc: {
@@ -65,20 +64,19 @@ export const confirmPurchase = async (req, res) => {
         const stream = fs.createWriteStream(filePath);
         doc.pipe(stream);
 
-        doc.fontSize(18).text("BILL", { align: "center" });
+        // Encabezado de la factura
+        doc.fontSize(18).text("Invoice", { align: "center" });
         doc.moveDown();
         doc.fontSize(12)
-            .text(`Bill #: ${billNum}`)
-            .text(`Date: ${new Date(bill.date).toLocaleDateString()}`)
-            .text(`Customer: ${usuario.name}`)
-            .text(`NIT ${nit}`)
-            .text(`Email: ${usuario.email}`)
-            .text(`Address: ${address}`)
+        .text(`Bill #: ${billNum}`)
+        .text(`Date: ${new Date(bill.date).toLocaleDateString()}`)
+        .text(`Customer: ${usuario.name}`)
+        .text(`NIT ${nit}`)
+        .text(`Email: ${usuario.email}`)
+        .text(`Address: ${address}`)
         doc.moveDown();
 
-        doc.fontSize(12).text("Products:", { underline: true });
-        doc.moveDown();
-
+        // Tabla de productos
         const tableTop = doc.y;
         const col1 = 50;
         const col2 = 200;
@@ -86,13 +84,15 @@ export const confirmPurchase = async (req, res) => {
         const col4 = 370;
         const col5 = 450;
 
+        // Títulos de las columnas
         doc.text("#", col1, tableTop, { bold: true });
-        doc.text("Name", col2, tableTop, { bold: true });
+        doc.text("Product", col2, tableTop, { bold: true });
         doc.text("Qty", col3, tableTop, { bold: true });
         doc.text("Price", col4, tableTop, { bold: true });
         doc.text("Subtotal", col5, tableTop, { bold: true });
         doc.moveDown();
 
+        // Datos de los productos
         bill.products.forEach((item, i) => {
             const y = tableTop + 25 + (i * 20);
             doc.text(`${i + 1}`, col1, y);
@@ -102,13 +102,18 @@ export const confirmPurchase = async (req, res) => {
             doc.text(`Q${item.subTotal}`, col5, y);
         });
 
+        // Total
         doc.moveDown();
         doc.fontSize(14).text(`Total: Q${total.toFixed(2)}`, { align: 'right' });
+
+        // Finaliza la escritura del PDF
         doc.end();
 
+        // Limpia el carrito
         cart.products = [];
         await cart.save();
 
+        // Responde con la factura generada
         res.status(200).json({
             success: true,
             message: "Purchase completed successfully",
