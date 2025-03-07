@@ -38,7 +38,8 @@ const options ={
         "./src/auth/auth.routes.js",
         "./src/category/category.routes.js",
         "./src/products/product.routes.js",
-        "./src/shopping/shopping.routes.js"
+        "./src/shopping/shopping.routes.js",
+        "./src/bill/bill.routes.js" // Added bill routes
     ]
 }
 
