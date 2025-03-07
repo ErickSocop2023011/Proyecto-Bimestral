@@ -2,10 +2,10 @@ import mongoose from "mongoose"
 
 export const dbConnection = async () => {
     try{
-        console.log('error', () =>{
+        () =>{
             console.log('MongoDB | could not be connect to MongoDB')
             mongoose.disconnect()
-        })
+        }
         mongoose.connection.on('connecting', () =>{
             console.log('MongoDB | try connecting')
         })

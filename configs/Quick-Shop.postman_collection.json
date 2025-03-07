@@ -313,6 +313,171 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEyODE1OTIsImV4cCI6MTc0MTI4NTE5Mn0.OITVpElliGOQY9gzO1qmvYuqv6jPWFIVvYKbw70mN68",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/category/getCategories",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"category",
+								"getCategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEyODE1OTIsImV4cCI6MTc0MTI4NTE5Mn0.OITVpElliGOQY9gzO1qmvYuqv6jPWFIVvYKbw70mN68",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"vegetables\",\r\n    \"description\":\"It refers to any product related to vegetables.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/category/addcategory",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"category",
+								"addcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEyODE1OTIsImV4cCI6MTc0MTI4NTE5Mn0.OITVpElliGOQY9gzO1qmvYuqv6jPWFIVvYKbw70mN68",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Meat\",\r\n    \"description\":\"It refers to any product related to Meat\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/category/updtcategory/67c9d9b71e1bf3a7ff48560d",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"category",
+								"updtcategory",
+								"67c9d9b71e1bf3a7ff48560d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M5MDE3ZTI3OTUwMWZmZjI3MDNjNDYiLCJpYXQiOjE3NDEyODE1OTIsImV4cCI6MTc0MTI4NTE5Mn0.OITVpElliGOQY9gzO1qmvYuqv6jPWFIVvYKbw70mN68",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/quickshop/v1/category/deleteCategory/67c9d9b71e1bf3a7ff48560d",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"quickshop",
+								"v1",
+								"category",
+								"deleteCategory",
+								"67c9d9b71e1bf3a7ff48560d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
